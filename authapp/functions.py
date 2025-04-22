@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 import datetime
 
 def contacts(user,username,lastname,color,initials):
-    Contact.objects.create(
+    Contact.objects.get_or_create(
           user=user,
           name=f"{username} {lastname}",
           email=f"{username}@web.com",
@@ -12,7 +12,7 @@ def contacts(user,username,lastname,color,initials):
           initials=initials       )
 
 def tasks(user,headher,description,pritority,category,kanban_category,due_date):
-    Task.objects.create(
+    Task.objects.get_or_create(
         user=user,
         header=headher,
         description=description,
