@@ -21,7 +21,7 @@ A Django REST API for task and contact management with user authentication.
 1. Clone the repository:
    ```
    git clone https://github.com/mneisens/Join_Backend
-   cd join
+   cd Join_Backend
    ```
 
 2. Create and activate a virtual environment:
