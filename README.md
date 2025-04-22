@@ -26,11 +26,10 @@ A Django REST API for task and contact management with user authentication.
 
 2. Create and activate a virtual environment:
    ```
-   python3 -m venv env # ON MAC
-   source env/bin/activate 
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
- 
+   # ON MAC
+   python3 -m venv env 
+   source env/bin/activate
+    
    ```
 
 3. Install the dependencies:
