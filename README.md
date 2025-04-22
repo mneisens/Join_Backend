@@ -47,12 +47,7 @@ A Django REST API for task and contact management with user authentication.
 
 ## API Endpoints
 
-### Authentication
 
-- `POST /api/auth/register/` - Register a new user
-- `POST /api/auth/login/` - Login with username and password
-- `POST /api/auth/guest-login/` - Login as a guest user
-- `POST /api/auth/logout/` - Logout and delete token
 
 ### Contacts
 
