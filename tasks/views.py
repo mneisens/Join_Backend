@@ -20,12 +20,8 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def by_kanban_category(self, request):
-        """
-        Gruppiert Tasks nach Kanban-Kategorie für die Board-Ansicht
-        """
         tasks = self.get_queryset()
         
-        # Gruppiere nach Kategorien
         result = {
             'Todo': TaskSerializer(tasks.filter(kanban_category='Todo'), many=True).data,
             'InProgress': TaskSerializer(tasks.filter(kanban_category='InProgress'), many=True).data,
@@ -35,11 +31,9 @@ class TaskViewSet(viewsets.ModelViewSet):
         
         return Response(result)
     
+    
     @action(detail=True, methods=['patch'])
     def update_category(self, request, pk=None):
-        """
-        Ändert die Kanban-Kategorie eines Tasks (für Drag & Drop)
-        """
         task = self.get_object()
         new_category = request.data.get('kanban_category')
         

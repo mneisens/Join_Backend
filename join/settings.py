@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'corsheaders',    
     'contacts',
     'tasks', 
-    'boards',
     'rest_framework.authtoken',
     'authapp',
 ]
