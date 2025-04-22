@@ -20,7 +20,7 @@ A Django REST API for task and contact management with user authentication.
 
 1. Clone the repository:
    ```
-   git clone [<repository-url>](https://github.com/mneisens/Join_Backend)
+   git clone https://github.com/mneisens/Join_Backend
    cd join
    ```
 
