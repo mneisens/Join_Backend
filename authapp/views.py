@@ -20,9 +20,38 @@ def register(request):
         return Response({'error': 'Username und Passwort erforderlich'}, status=status.HTTP_400_BAD_REQUEST)
     if User.objects.filter(username=u).exists():
         return Response({'error': 'Benutzer existiert bereits'}, status=status.HTTP_400_BAD_REQUEST)
+    
     user = User.objects.create_user(username=u, password=p)
     token, _ = Token.objects.get_or_create(user=user)
+    create_user_contact(user)
+    
     return Response({'token': token.key}, status=status.HTTP_201_CREATED)
+
+def create_user_contact(user):
+    import random    
+    colors = ["red", "green", "blue", "purple", "orange", "pink", "brown", "gray"]
+    color = random.choice(colors)
+    username = user.username
+    if '@' in username:
+        username = username.split('@')[0]
+    
+    initials = username[0].upper()
+    if len(username) > 1:
+        initials += username[1].upper()
+    
+    email = user.username if '@' in user.username else f"{username}@example.com"
+    
+    try:
+        from contacts.models import Contact
+        Contact.objects.create(
+            user=user,
+            name=username,  
+            email=email,
+            color=color,
+            initials=initials
+        )
+    except Exception as e:
+        print(f"Fehler beim Erstellen des Kontakts: {e}")
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -43,7 +72,11 @@ def user_login(request):
         return Response({'error': 'Passwort falsch'}, status=401)
 
     token, _ = Token.objects.get_or_create(user=user)
-    return Response({'token': token.key})
+    return Response({
+            'token': token.key,
+            'username': user.username,
+        })
+
 
 
 @api_view(['POST'])
@@ -65,7 +98,6 @@ def logout_view(request):
     Token.objects.filter(user=user).delete()
     if user.username.startswith('guest_'):
         user.delete()
-
     return Response(status=204)
 
 
